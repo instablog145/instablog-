@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intablog</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080808;
+    color: white;
+}
+
+.app {
+    max-width: 600px;
+    margin: auto;
+    min-height: 100vh;
+    background: #111;
+}
+
+/* HEADER */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(10,10,10,.96);
+    padding: 14px 16px;
+    border-bottom: 1px solid #222;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ff0050;
+}
+
+.creator {
+    font-size: 10px;
+    color: #aaa;
+}
+
+/* HOME */
+
+.home {
+    padding-bottom: 80px;
+}
+
+.intro {
+    padding: 18px;
+}
+
+.intro h2 {
+    margin-bottom: 7px;
+}
+
+.intro p {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* VIDEO */
+
+.video-card {
+    position: relative;
+    height: 76vh;
+    min-height: 500px;
+    margin-bottom: 2px;
+    overflow: hidden;
+    background: #181818;
+}
+
+.video-card iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-info {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 80px;
+    z-index: 5;
+    background: linear-gradient(transparent, rgba(0,0,0,.8));
+    padding-top: 60px;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.caption {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.tiktok-btn {
+    display: inline-block;
+    margin-top: 12px;
+    background: #ff0050;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* SIDE ACTIONS */
+
+.actions {
+    position: absolute;
+    right: 12px;
+    bottom: 70px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.action {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.15);
+    color: white;
+    font-size: 21px;
+}
+
+.action:active {
+    transform: scale(.9);
+}
+
+.count {
+    font-size: 10px;
+    text-align: center;
+    margin-top: -13px;
+}
+
+/* BOTTOM NAV */
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    height: 65px;
+    background: #050505;
+    border-top: 1px solid #222;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 30;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 22px;
+}
+
+.nav-btn.active {
+    color: white;
+}
+
+.nav-label {
+    display: block;
+    font-size: 9px;
+    margin-top: 3px;
+}
+
+/* SEARCH */
+
+.search-page {
+    padding: 20px;
+    display: none;
+    padding-bottom: 90px;
+}
+
+.search-box {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    background: #222;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.result {
+    background: #1c1c1c;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.result a {
+    color: #ff0050;
+}
+
+/* PROFILE */
+
+.profile-page {
+    display: none;
+    text-align: center;
+    padding: 30px 20px 100px;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#ff0050,#7000ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    font-weight: bold;
+    margin: auto;
+}
+
+.profile-page h2 {
+    margin-top: 15px;
+}
+
+.signature {
+    margin-top: 30px;
+    color: #777;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .video-card {
+        height: 75vh;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="header">
+        <div>
+            <div class="logo">
+                <span>In</span>tablog
+            </div>
+
+            <div class="creator">
+                Created by Wisdom
+            </div>
+        </div>
+
+        <div>•••</div>
+    </div>
+</header>
+
+
+<!-- HOME -->
+
+<main id="home" class="home">
+
+    <div class="intro">
+        <h2>For You</h2>
+        <p>Discover TikTok videos through Intablog.</p>
+    </div>
+
+
+    <!-- VIDEO 1 -->
+
+    <section class="video-card">
+
+        <!-- Replace VIDEO_ID with an actual TikTok post ID -->
+
+        <iframe
+            src="https://www.tiktok.com/player/v1/VIDEO_ID"
+            allow="autoplay; encrypted-media;"
+            allowfullscreen>
+        </iframe>
+
+
+        <div class="actions">
+
+            <button class="action"
+                onclick="like(this)">
+                ❤️
+            </button>
+
+            <div class="count">0</div>
+
+
+            <button class="action"
+                onclick="comment()">
+                💬
+            </button>
+
+            <button class="action"
+                onclick="share()">
+                ↗
+            </button>
+
+        </div>
+
+
+        <div class="video-info">
+
+            <div class="username">
+                @TikTokCreator
+            </div>
+
+            <div class="caption">
+                Watch this TikTok video on Intablog.
+            </div>
+
+            <a
+                class="tiktok-btn"
+                href="https://www.tiktok.com/"
+                target="_blank">
+                Open in TikTok
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- VIDEO 2 -->
+
+    <section class="video-card">
+
+        <iframe
+            src="https://www.tiktok.com/player/v1/7690966425913068830"
+            allow="autoplay; encrypted-media;"
+            allowfullscreen>
+        </iframe>
+
+        <div class="actions">
+
+            <button class="action"
+                onclick="like(this)">
+                ❤️
+            </button>
+
+            <div class="count">0</div>
+
+            <button class="action"
+                onclick="comment()">
+                💬
+            </button>
+
+            <button class="action"
+                onclick="share()">
+                ↗
+            </button>
+
+        </div>
+
+        <div class="video-info">
+
+            <div class="username">
+                @TikTokCreator
+            </div>
+
+            <div class="caption">
+                More videos coming to Intablog.
+            </div>
+
+            <a
+                class="tiktok-btn"
+                href="https://www.tiktok.com/"
+                target="_blank">
+                Open in TikTok
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- SEARCH -->
+
+<section id="searchPage" class="search-page">
+
+    <h2>Search</h2>
+
+    <br>
+
+    <input
+        id="searchInput"
+        class="search-box"
+        placeholder="Search TikTok..."
+        onkeyup="search()"
+    >
+
+    <div class="result">
+        Search for creators, hashtags and videos.
+    </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profilePage" class="profile-page">
+
+    <div class="avatar">
+        W
+    </div>
+
+    <h2>Wisdom</h2>
+
+    <p>@wisdom</p>
+
+    <br>
+
+    <p>
+        Welcome to my Intablog profile.
+    </p>
+
+    <div class="signature">
+        Intablog • Created by Wisdom
+    </div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+
+<nav class="bottom">
+
+    <button class="nav-btn active"
+        onclick="showPage('home')">
+        🏠
+        <span class="nav-label">Home</span>
+    </button>
+
+    <button class="nav-btn"
+        onclick="showPage('searchPage')">
+        🔍
+        <span class="nav-label">Search</span>
+    </button>
+
+    <button class="nav-btn"
+        onclick="openTikTok()">
+        🎵
+        <span class="nav-label">TikTok</span>
+    </button>
+
+    <button class="nav-btn"
+        onclick="showPage('profilePage')">
+        👤
+        <span class="nav-label">Profile</span>
+    </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* PAGE NAVIGATION */
+
+function showPage(page) {
+
+    document.getElementById("home").style.display = "none";
+
+    document.getElementById("searchPage").style.display = "none";
+
+    document.getElementById("profilePage").style.display = "none";
+
+    document.getElementById(page).style.display =
+        page === "home" ? "block" : "block";
+
+}
+
+
+/* OPEN TIKTOK */
+
+function openTikTok() {
+
+    window.open(
+        "https://www.tiktok.com/",
+        "_blank"
+    );
+
+}
+
+
+/* LIKE */
+
+function like(button) {
+
+    const count =
+        button.parentElement
+        .querySelector(".count");
+
+    let number =
+        parseInt(count.innerText);
+
+    if (!button.dataset.liked) {
+
+        number++;
+
+        button.dataset.liked = "true";
+
+    } else {
+
+        number--;
+
+        delete button.dataset.liked;
+
+    }
+
+    count.innerText = number;
+
+}
+
+
+/* COMMENT */
+
+function comment() {
+
+    const text =
+        prompt("Write your comment:");
+
+    if (text && text.trim()) {
+
+        alert(
+            "Comment added to Intablog!"
+        );
+
+    }
+
+}
+
+
+/* SHARE */
+
+function share() {
+
+    if (navigator.share) {
+
+        navigator.share({
+
+            title: "Intablog",
+
+            text: "Check out this TikTok on Intablog!",
+
+            url: window.location.href
+
+        });
+
+    } else {
+
+        navigator.clipboard.writeText(
+            window.location.href
+        );
+
+        alert("Link copied!");
+
+    }
+
+}
+
+
+/* SEARCH */
+
+function search() {
+
+    const value =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    if (value) {
+
+        console.log(
+            "Searching TikTok for:",
+            value
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
